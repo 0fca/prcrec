@@ -1,5 +1,5 @@
 # prcrec
-_MacroPath(codename: prcrec)_ is a simple recorderd which records user's actions taken using keyboard and mouse wherever 
+_MacroPath(codename: prcrec)_ is a simple recorder which records user's actions taken using keyboard and mouse wherever 
 on the screen, doesnt matter on what window. 
 
 MacroPath is in BETA phase. It actually supports recording ASCII chars, it recognizes all system key like **_Alt_**, **_AltGr_**,**_Shift_** etc.
