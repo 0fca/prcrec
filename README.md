@@ -4,7 +4,7 @@ on the screen, doesnt matter on what window.
 
 MacroPath is in BETA phase. It actually supports recording ASCII chars, it recognizes all system key like **_Alt_**, **_AltGr_**,**_Shift_** etc.
 
-I used Win32 API to make all the application logic and a bit of Reflection mechanism. The UI is built using modern WPF. 
+I used Win32 API to make all the application logic and a bit of reflection mechanism. The UI is built using modern WPF(Modern UI). 
 
 The app can:
 * record mouse x,y coodrinates according to foreground window,
@@ -14,7 +14,7 @@ The app can:
 * save the macro to the CSV file,
 * work in the background without showing on the taskbar.
 
-Notes:
+**IMPORTANT NOTES**:
 The architecture of the program causes it to save the keyboard input as it is so the Shift key is like a dynamic-state key and Alts are too.
 Please, mind it when recording input from the keyboard because writing for example capital letters looks like:
 Press Shift, release it and then press the chartacter key; **_DO NOT_** do it at the same time, it wont givre any effect in the macro!
