@@ -25,7 +25,7 @@ _App in action_
 **IMPORTANT NOTES**:
 The architecture of the program causes it to save the keyboard input as it is so the Shift key is like a dynamic-state key and Alts are too.
 Please, mind it when recording input from the keyboard because writing for example capital letters looks like:
-Press Shift, release it and then press the chartacter key; **_DO NOT_** do it at the same time, it wont givre any effect in the macro!
+Press Shift, release it and then press the chartacter key; **_DO NOT_** do it at the same time, it wont give any effect in the macro!
 
 
 
