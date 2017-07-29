@@ -14,6 +14,14 @@ The app can:
 * save the macro to the CSV file,
 * work in the background without showing on the taskbar.
 
+_Main view of an app_
+
+![Main view](https://github.com/Obsidiam/prcrec/blob/master/Screenshot_2017-07-29_14-46-07.png)
+
+_App in action_
+
+![App in action](https://github.com/Obsidiam/prcrec/blob/master/VirtualBox_Win10_29_07_2017_14_46_47.png)
+
 **IMPORTANT NOTES**:
 The architecture of the program causes it to save the keyboard input as it is so the Shift key is like a dynamic-state key and Alts are too.
 Please, mind it when recording input from the keyboard because writing for example capital letters looks like:
