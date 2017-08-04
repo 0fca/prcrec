@@ -23,9 +23,7 @@ _App in action_
 ![App in action](https://github.com/Obsidiam/prcrec/blob/master/VirtualBox_Win10_29_07_2017_14_46_47.png)
 
 **IMPORTANT NOTES**:
-The architecture of the program causes it to save the keyboard input as it is so the Shift key is like a dynamic-state key and Alts are too.
-Please, mind it when recording input from the keyboard because writing for example capital letters looks like:
-Press Shift, release it and then press the chartacter key; **_DO NOT_** do it at the same time, it wont give any effect in the macro!
+No important notes.
 
 
 
