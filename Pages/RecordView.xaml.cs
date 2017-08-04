@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace ProcessRecorder.Pages
@@ -14,6 +15,7 @@ namespace ProcessRecorder.Pages
     {
         private IntPtr MW;
         private IntPtr ACTV_PRC_HWND = WinApi.Win32.User.Hook.LoadLibrary("user32.dll");
+        private string ACT_WND_TITLE = "";
         WinApi.Win32.User.Hook.HookProc MouseHookProcedure;
         WinApi.Win32.User.Hook.HookProc KeyboardHookProcedure;
         int hHook, kHook;
@@ -21,7 +23,6 @@ namespace ProcessRecorder.Pages
         List<string> MOUSE_POS_TRACK = new List<string>(), KEYBOARD_STATE_TRACK = new List<string>();
         BrushConverter bc = new BrushConverter();
         bool isOn = false;
-        bool canAdd = true;
 
         public RecordView()
         {
@@ -38,8 +39,6 @@ namespace ProcessRecorder.Pages
                 SetActiveHandles(threadId);
                 startButton.IsEnabled = false;
                 stopButton.IsEnabled = true;
-                Debug.WriteLine(WinApi.User.Input.GetLastError());
-                Debug.WriteLine(WinApi.User.Window.GetLastError());
             }
             isOn = !isOn;
         }
@@ -70,10 +69,17 @@ namespace ProcessRecorder.Pages
                 ACTV_PRC_HWND = FRG_HWND;
                 string onScr, onWnd = "";
                 onScr = "On Screen: " + wParam + " : " + MyMouseHookStruct.pt.x + "," + MyMouseHookStruct.pt.y;
+                
                 WinApi.User.Window.GetCursorPos(out MyMouseHookStruct.pt);
                 WinApi.User.Window.ScreenToClient(FRG_HWND, ref MyMouseHookStruct.pt);
-                onWnd += "\nOn Window: " + wParam + " : " + MyMouseHookStruct.pt.x + "," + MyMouseHookStruct.pt.y;
+                onWnd += "On Window: " + wParam + " : " + MyMouseHookStruct.pt.x + "," + MyMouseHookStruct.pt.y;
                 infoLabel.Text = string.Format("{0}\n{1}", onScr, onWnd);
+                StringBuilder sb = new StringBuilder(WinApi.User.Window.GetWindowTextLength(FRG_HWND) + 1);
+                WinApi.User.Window.GetWindowText(FRG_HWND, sb, sb.Capacity);
+                ACT_WND_TITLE = sb.ToString();
+
+                titleLabel.Content = "Focused window is "+ACT_WND_TITLE;
+
                 if ((int)wParam == WinApi.Win32.User.Hook.WM_LBUTTONDOWN | (int)wParam == WinApi.Win32.User.Hook.WM_RBUTTONDOWN)
                 {
                     MOUSE_POS_TRACK.Add(wParam.ToInt32().ToString() + ":" + MyMouseHookStruct.pt.x + ":" + MyMouseHookStruct.pt.y);
@@ -97,55 +103,85 @@ namespace ProcessRecorder.Pages
             }
             else
             {
-                int vkCode = KeyStruct.vkCode;
-                char ch = TranslateVirtualKeyIntoChar((uint)vkCode);
-
-                if ((int)wParam == 260 && canAdd)
+                if (ACTV_PRC_HWND != MW)
                 {
-                    short altgr = WinApi.User.Input.GetAsyncKeyState((int)WinApi.User.Input.VK_RMENU);
-                    short alt = WinApi.User.Input.GetAsyncKeyState((int)WinApi.User.Input.VK_LMENU);
-
-                    if ((altgr & 1) == 1 & (alt & 1) != 1)
+                    int vkCode = KeyStruct.vkCode;
+                    char ch = TranslateVirtualKeyIntoChar((uint)vkCode);
+                    byte[] getState = new byte[256];
+                    WinApi.User.Input.GetKeyboardState(getState);
+                    //Debug.WriteLine(getState);
+                    
+                    for (int i = 0; i < 16; i++)
                     {
-                        Debug.Write("[Alt]");
-                        KEYBOARD_STATE_TRACK.Add("[Alt]") ;
+
+                        byte key = getState[i];
+
+                        if ((key & 1) == 1)
+                        {
+
+                            string value = TranslateVirtualKeyToString((uint)vkCode, ch);
+                            if (value.Length > 1)
+                            {
+                                value = "[" + value + "]";
+                            }
+
+                            KEYBOARD_STATE_TRACK.Add(value);
+                            Debug.Write(value);
+                            keyboardInputTextBlock.Text = "Text is entered to window " + ACT_WND_TITLE + ".";
+                        }
+                        else if((key & 1) == 0)
+                        {
+                                keyboardInputTextBlock.Text = "No text is entered now.";
+                        }
                     }
 
-                    if ((alt & 1) == 1 & (altgr & 1) != 1)
-                    {
-                        Debug.Write("[AltGr]");
-                        KEYBOARD_STATE_TRACK.Add("[AltGr]");
-                    }
-                    canAdd = false;
-                }
+                    //if ((int)wParam == 260 && canAdd)
+                    //{
+                    //    short altgr = WinApi.User.Input.GetAsyncKeyState((int)WinApi.User.Input.VK_RMENU);
+                    //    short alt = WinApi.User.Input.GetAsyncKeyState((int)WinApi.User.Input.VK_LMENU);
 
-                if ((int)wParam == 256 && canAdd)
-                {
-                        //Debug.WriteLine((uint)vkCode);
-                        string text_rep = TranslateVirtualKeyToString((uint)vkCode, ch);
-                        if (text_rep.Length == 1)
-                        {
-                            Debug.Write(text_rep);
-                            KEYBOARD_STATE_TRACK.Add(text_rep);
-                        }
-                        else
-                        {
-                        Debug.Write("["+text_rep+"]");
-                        KEYBOARD_STATE_TRACK.Add("[" + text_rep + "]");
-                        }
-                    canAdd = false;
-                }
+                    //    if ((altgr & 1) == 1 & (alt & 1) != 1)
+                    //    {
+                    //        Debug.Write("[Alt]");
+                    //        KEYBOARD_STATE_TRACK.Add("[Alt]");
+                    //    }
 
-                if ((int)wParam == 257 || (int)wParam == 270) {
-                    canAdd = true;
+                    //    if ((alt & 1) == 1 & (altgr & 1) != 1)
+                    //    {
+                    //        Debug.Write("[AltGr]");
+                    //        KEYBOARD_STATE_TRACK.Add("[AltGr]");
+                    //    }
+                    //    canAdd = false;
+                    //}
+
+                    //if ((int)wParam == 256 && canAdd)
+                    //{
+                    //    string text_rep = TranslateVirtualKeyToString((uint)vkCode, ch);
+                    //    if (text_rep.Length == 1)
+                    //    {
+                    //        Debug.Write(text_rep);
+                    //        KEYBOARD_STATE_TRACK.Add(text_rep);
+                    //    }
+                    //    else
+                    //    {
+                    //        Debug.Write("[" + text_rep + "]");
+                    //        KEYBOARD_STATE_TRACK.Add("[" + text_rep + "]");
+                    //    }
+                    //    canAdd = false;
+                    //}
+
+                    //if ((int)wParam == 257 || (int)wParam == 270)
+                    //{
+                    //    canAdd = true;
+                    //}
                 }
                 return WinApi.Win32.User.Hook.CallNextHookEx(kHook, nCode, wParam, lParam);
-            }
+                }
         }
 
         private string TranslateVirtualKeyToString(uint key, char c)
         {
-
+           
             if (key >= 65 & key <= 122)
             {
                 if (IsShiftKeyDown())
@@ -257,6 +293,7 @@ namespace ProcessRecorder.Pages
             if (isOn)
             {
                 Stop();
+                ACTV_PRC_HWND = (IntPtr)0;
                 startButton.IsEnabled = true;
                 stopButton.IsEnabled = false;
             }
@@ -266,13 +303,13 @@ namespace ProcessRecorder.Pages
         private void ButtonMouseEntered(object sender, System.Windows.Input.MouseEventArgs e)
         {
             System.Windows.Controls.Button b = (System.Windows.Controls.Button)e.Source;
-            b.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#FF03A9F4");
+            b.Background = (Brush)bc.ConvertFrom("#FF03A9F4");
         }
 
         private void ButtonMouseLeaved(object sender, System.Windows.Input.MouseEventArgs e)
         {
             System.Windows.Controls.Button b = (System.Windows.Controls.Button)e.Source;
-            b.Background = System.Windows.Media.Brushes.Transparent;
+            b.Background = Brushes.Transparent;
         }
 
       

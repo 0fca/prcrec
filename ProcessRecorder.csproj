@@ -61,7 +61,7 @@
     </Compile>
     <Compile Include="Enums\VirtualKeys.cs" />
     <Compile Include="Images\Image.cs" />
-    <Compile Include="Pages\About.xaml.cs">
+    <Compile Include="Pages\Settings\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Description.xaml.cs">
@@ -69,6 +69,9 @@
     </Compile>
     <Compile Include="Pages\RecordView.xaml.cs">
       <DependentUpon>RecordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TraceView.xaml.cs">
+      <DependentUpon>TraceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Win32\Hook.cs" />
     <Compile Include="Win32\Image.cs" />
@@ -83,7 +86,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\About.xaml">
+    <Page Include="Pages\Settings\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,13 +98,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Settings\About.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="Pages\Settings\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
     <Page Include="Pages\Settings\Appearance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +121,10 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Pages\TraceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

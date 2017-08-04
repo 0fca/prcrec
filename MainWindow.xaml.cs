@@ -52,7 +52,7 @@ namespace ProcessRecorder
 
             n.ContextMenu = contextMenu1;
 
-            n.Text = "MacroPath v.1.0";
+            n.Text = "MacroPath v.1.1";
             n.Visible = true;
             n.Icon = new Icon(SystemIcons.Information, 40, 40);
             n.Click += new EventHandler(NotifyIcon1_Click);

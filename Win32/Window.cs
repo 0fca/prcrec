@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace WinApi.User
 {
@@ -35,17 +36,19 @@ namespace WinApi.User
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
 
+        
+
         [DllImport("user32.dll")]
         public static extern void SetForegroundWindow(IntPtr hWnd);
 
         public static uint GetWindowThreadProcessId(IntPtr hwnd)
         {
-            uint processID = 0;
-            GetWindowThreadProcessId(hwnd, out processID);
+            
+            GetWindowThreadProcessId(hwnd, out uint processID);
             return processID;
         }
 
-        [DllImport("user32.dll",SetLastError = true)]
+        [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport("user32.dll", SetLastError = true)]
@@ -53,5 +56,11 @@ namespace WinApi.User
 
         [DllImport("kernel32.dll")]
         public static extern uint GetLastError();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int GetWindowText([In]IntPtr hWnd, [Out] StringBuilder lpString, [In]int maxCount);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int GetWindowTextLength(IntPtr hWnd);
     }
 }

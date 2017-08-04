@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ProcessRecorder.Pages.About"
+﻿<UserControl x:Class="ProcessRecorder.Pages.TraceView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,10 +9,15 @@
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel MinWidth="200">
-                <TextBlock Text="ABOUT" Style="{StaticResource Heading2}" Margin="0,0,0,25" />
-                <TextBlock Text="MacroPath v1.1" Margin="0,0,0,10" HorizontalAlignment="Center" />
-                <TextBlock TextWrapping="Wrap" Text="Author: Obsidiam" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-                <TextBlock TextWrapping="Wrap" Cursor="Hand" Text="GitHub" HorizontalAlignment="Center" MouseDown="LinkTextBlockMouseDown"/>
+                <TextBlock Text="TRACE VIEW" Style="{StaticResource Heading2}" Margin="0,0,0,26" />
+                <TextBlock Text="Here you can see the trace of actions which have been done" TextWrapping="Wrap" Padding="0,0,0,15" />
+                <ListView x:Name="traceListView" Height="162" Width="270">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </StackPanel>
         </ScrollViewer>
     </Grid>

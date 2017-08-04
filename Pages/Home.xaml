@@ -11,7 +11,7 @@
         <mui:ModernTab.Links>
                 <mui:Link DisplayName="Welcome" Source="/Pages/Description.xaml" />
                 <mui:Link DisplayName="Recorder View" Source="/Pages/RecordView.xaml" />
-                <mui:Link DisplayName="About" Source="/Pages/About.xaml" />
+                <mui:Link DisplayName="Macro Event Trace" Source="/Pages/TraceView.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

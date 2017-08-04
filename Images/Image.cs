@@ -5,7 +5,7 @@ using System;
 
 namespace ProcessRecorder.Images
 {
-    class Image
+    internal class Image
     {
         public static string USER_NAME  = System.Security.Principal.WindowsIdentity.GetCurrent().Name;   
         public static string TMP_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"\\Local\\PrcRecTmp";

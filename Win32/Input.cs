@@ -40,11 +40,6 @@ namespace WinApi.User
         [DllImport("User32.dll")]
         public static extern short GetAsyncKeyState(VirtualKeys vKey);
 
-
-        [DllImport("user32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GetKeyboardState(byte[] lpKeyState);
-
         [DllImport("user32.dll")]
         public static extern int ToAscii(uint virtualKeyCode, uint scanCode,
             ref byte[] keyboardState,
@@ -54,16 +49,17 @@ namespace WinApi.User
         [DllImport("user32.dll")]
         public static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
-        [DllImport("user32.dll")]
-        public static extern short GetKeyState(uint nVirtKey);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetFocus();
+        [DllImport("user32")]
+        public static extern bool GetKeyboardLayout(IntPtr pwszKLID);
 
         [DllImport("user32.dll")]
         public static extern short VkKeyScan(char ch);
 
         [DllImport("kernel32.dll")]
-        public static extern uint GetLastError(); 
+        public static extern uint GetLastError();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetKeyboardState([Out]byte[] lpKeyState);
     }
 }
