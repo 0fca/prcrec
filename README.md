@@ -9,7 +9,7 @@ I used Win32 API to make all the application logic and a bit of reflection mecha
 The app can:
 * record mouse x,y coodrinates according to foreground window,
 * record keyboard input whenever it is typed(does not need to enter text to textbox, just type),
-* fluent keyboard input method using all system keys(application record both keys presses at a time),
+* fluent keyboard input method using all system keys(application record both keys pressed at a time),
 * detect what window is focused,
 * make a screen capture of the area near to the mouse click(in theory now),
 * save the macro to the CSV file,
