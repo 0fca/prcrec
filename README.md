@@ -24,7 +24,12 @@ _App in action_
 ![App in action](https://github.com/Obsidiam/prcrec/blob/master/VirtualBox_Win10_29_07_2017_14_46_47.png)
 
 **IMPORTANT NOTES**:
-No important notes.
+There is a need to add Modern UI(mui) packages using NuGet. packages.config file contains a record for it, however VS not always want to resolve dependency that way so then:
+* remove reference,
+* enter NuGet,
+* find Modern UI(mui),
+* Install(or reinstall it),
+* Done. 
 
 
 
