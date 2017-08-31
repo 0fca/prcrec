@@ -17,11 +17,11 @@ The app can:
 
 _Main view of an app_
 
-![Main view](https://github.com/Obsidiam/prcrec/blob/master/Screenshot_2017-07-29_14-46-07.png)
+![Main view](http://imgur.com/a/VePWx)
 
 _App in action_
 
-![App in action](https://github.com/Obsidiam/prcrec/blob/master/VirtualBox_Win10_29_07_2017_14_46_47.png)
+![App in action](http://imgur.com/a/tVAbU)
 
 **IMPORTANT NOTES**:
 There is a need to add Modern UI(mui) packages using NuGet. packages.config file contains a record for it, however VS not always want to resolve dependency that way so then:
