@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:Local="clr-namespace:ProcessRecorder.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
@@ -11,13 +12,22 @@
             <StackPanel MinWidth="200">
                 <TextBlock Text="TRACE VIEW" Style="{StaticResource Heading2}" Margin="0,0,0,26" />
                 <TextBlock Text="Here you can see the trace of actions which have been done" TextWrapping="Wrap" Padding="0,0,0,15" />
-                <ListView x:Name="traceListView" Height="162" Width="270">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <Grid>
+                    <ListView Margin="10" Name="traceListView">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding ImageName}" />
+                                <GridViewColumn Header="Image" Width="250">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding ImageFullPath}" Width="250" Height="150" Stretch="Fill" SnapsToDevicePixels="True" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
             </StackPanel>
         </ScrollViewer>
     </Grid>

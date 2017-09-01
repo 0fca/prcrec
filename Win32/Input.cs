@@ -2,6 +2,8 @@
 using System.Text;
 using System.Runtime.InteropServices;
 using WinApi.User.Enumeration;
+using System.Windows.Input;
+using System.Collections.Generic;
 
 namespace WinApi.User
 {

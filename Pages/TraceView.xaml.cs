@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ProcessRecorder.Images;
 
 namespace ProcessRecorder.Pages
 {
@@ -23,6 +16,32 @@ namespace ProcessRecorder.Pages
         public TraceView()
         {
             InitializeComponent();
+            traceListView.ItemsSource = ImageContainer.GetImages();
+            
+        }
+    }
+
+    internal class ImageContainer {
+        internal static ObservableCollection<ImageData> GetImages()
+        {
+            ObservableCollection<ImageData> results = new ObservableCollection<ImageData>();
+            if (Directory.Exists(ImageCapturer.TMP_DIR))
+            {
+                string[] files = Directory.GetFiles(ImageCapturer.TMP_DIR);
+                foreach (string card in files)
+                {
+                    string name = Path.GetFileName(card);
+                    ImageData im = new ImageData();
+                    im.ImageName = name;
+                    im.ImageFullPath = card;
+                    results.Add(im);
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(Images.ImageCapturer.TMP_DIR);
+            }
+            return results;
         }
     }
 }
