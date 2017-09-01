@@ -9,6 +9,7 @@ I used Win32 API to make all the application logic and a bit of reflection mecha
 The app can:
 * record mouse x,y coodrinates according to foreground window,
 * record keyboard input whenever it is typed(does not need to enter text to textbox, just type),
+* fluent keyboard input method using all system keys(application record both keys pressed at a time),
 * detect what window is focused,
 * make a screen capture of the area near to the mouse click(in theory now),
 * save the macro to the CSV file,
@@ -16,16 +17,19 @@ The app can:
 
 _Main view of an app_
 
-![Main view](https://github.com/Obsidiam/prcrec/blob/master/Screenshot_2017-07-29_14-46-07.png)
+![Main view](http://i.imgur.com/JNy5xE2.png)
 
 _App in action_
 
-![App in action](https://github.com/Obsidiam/prcrec/blob/master/VirtualBox_Win10_29_07_2017_14_46_47.png)
+![App in action](http://i.imgur.com/CzcBoOC.png)
 
 **IMPORTANT NOTES**:
-The architecture of the program causes it to save the keyboard input as it is so the Shift key is like a dynamic-state key and Alts are too.
-Please, mind it when recording input from the keyboard because writing for example capital letters looks like:
-Press Shift, release it and then press the chartacter key; **_DO NOT_** do it at the same time, it wont give any effect in the macro!
+There is a need to add Modern UI(mui) packages using NuGet. packages.config file contains a record for it, however VS not always want to resolve dependency that way so then:
+* remove reference,
+* enter NuGet,
+* find Modern UI(mui),
+* Install(or reinstall it),
+* Done. 
 
 
 
