@@ -5,15 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:Local="clr-namespace:ProcessRecorder.Pages"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
+        <ScrollViewer ScrollChanged="ScrollChanged">
             <StackPanel MinWidth="200">
                 <TextBlock Text="TRACE VIEW" Style="{StaticResource Heading2}" Margin="0,0,0,26" />
                 <TextBlock Text="Here you can see the trace of actions which have been done" TextWrapping="Wrap" Padding="0,0,0,15" />
                 <Grid>
-                    <ListView Margin="10" Name="traceListView">
+                    <ListView Margin="10" Name="traceListView" Background="Transparent" MouseWheel="MouseWheelListener" Foreground="#FF212121">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding ImageName}" />

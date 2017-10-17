@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinApi.User.Enumeration
+namespace Win32.User.Enumeration
 {
     enum MouseButtons
     {

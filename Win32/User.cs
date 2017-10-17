@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcessRecorderWPF
+namespace Win32.Users
 {
     public class User
     {
-
+        //prototype class, not needed at the moment
     }
 }

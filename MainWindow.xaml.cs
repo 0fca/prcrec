@@ -54,7 +54,7 @@ namespace ProcessRecorder
             System.Windows.Forms.MouseEventArgs m = (System.Windows.Forms.MouseEventArgs)e;
             if (m.Button == MouseButtons.Left)
             {
-                WinApi.User.Window.SetForegroundWindow(new WindowInteropHelper(this).Handle);
+                Win32.User.Window.SetForegroundWindow(new WindowInteropHelper(this).Handle);
                 this.WindowState = WindowState.Normal;
             }
         }
@@ -66,7 +66,7 @@ namespace ProcessRecorder
 
         private void SettingsMenuItemClick(object sender, EventArgs e)
         {
-            WinApi.User.Window.SetForegroundWindow(new WindowInteropHelper(this).Handle);
+            Win32.User.Window.SetForegroundWindow(new WindowInteropHelper(this).Handle);
             this.WindowState = WindowState.Normal;
         }
 

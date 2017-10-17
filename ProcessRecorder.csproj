@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProcessRecorder</RootNamespace>
     <AssemblyName>ProcessRecorder</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,10 +60,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Enums\MouseButtons.cs" />
-    <Compile Include="Enums\VirtualKeys.cs" />
+    <Compile Include="Enums\MouseButtonEnum.cs" />
+    <Compile Include="Enums\VirtualKeyEnum.cs" />
     <Compile Include="Images\Image.cs" />
     <Compile Include="Images\ImageCapturer.cs" />
+    <Compile Include="Model\InputDataModel.cs" />
+    <Compile Include="Model\TracesModel.cs" />
     <Compile Include="NativeControllers\NativeController.cs" />
     <Compile Include="Pages\Settings\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -79,6 +82,7 @@
     <Compile Include="Win32\Hook.cs" />
     <Compile Include="Win32\Image.cs" />
     <Compile Include="Win32\Input.cs" />
+    <Compile Include="Win32\InputFormat\InputDataFormater.cs" />
     <Compile Include="Win32\User.cs" />
     <Compile Include="Win32\Window.cs" />
     <Page Include="MainWindow.xaml">
@@ -133,6 +137,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

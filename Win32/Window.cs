@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace WinApi.User
+namespace Win32.User
 {
     public class Window
     {

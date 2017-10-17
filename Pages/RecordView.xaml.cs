@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ProcessRecorder.Model;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -16,18 +12,20 @@ namespace ProcessRecorder.Pages
        
         BrushConverter bc = new BrushConverter();
         bool isOn = false;
-        NativeControllers.NativeController n = new NativeControllers.NativeController();
+        NativeControllers.NativeController n;
+        InputDataModel idm = new InputDataModel();
         public RecordView()
         {
             InitializeComponent();
-            n.PropertyChanged += new PropertyChangedEventHandler(SetDataToView);
+            n = new NativeControllers.NativeController(idm);
+            idm.PropertyChanged += new PropertyChangedEventHandler(SetDataToView);
         }
 
         internal void SetDataToView(object sender, PropertyChangedEventArgs e) {
            
-           infoLabel.Text = n.MouseLocationData;
-           titleLabel.Content = n.MouseData;
-           keyboardInputTextBlock.Text = n.KeyboardData;
+           infoLabel.Text = idm.MouseLocationData;
+           titleLabel.Content = idm.MouseData;
+           keyboardInputTextBlock.Text = idm.KeyboardData;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -37,7 +35,7 @@ namespace ProcessRecorder.Pages
                 n.InitProcedures();
                 Task task = new Task(() => IfAnyKeyPressed());
                 //task.Start();
-                WinApi.User.Window.GetWindowThreadProcessId(NativeControllers.NativeController.GetActvHwnd(), out uint threadId);
+                Win32.User.Window.GetWindowThreadProcessId(NativeControllers.NativeController.GetActvHwnd(), out uint threadId);
                 n.SetActiveHandles(threadId);
                 startButton.IsEnabled = false;
                 stopButton.IsEnabled = true;
@@ -72,7 +70,7 @@ namespace ProcessRecorder.Pages
         public void IfAnyKeyPressed() {
             while (true) {
                 byte[] b = new byte[256];
-                bool isAnyError = WinApi.User.Input.GetKeyboardState(b);
+                bool isAnyError = Win32.User.Input.GetKeyboardState(b);
 
                 if (isAnyError)
                 {
@@ -91,7 +89,7 @@ namespace ProcessRecorder.Pages
                 }
                 else
                 {
-                    Debug.WriteLine("Error..."+WinApi.User.Input.GetLastError());
+                    Debug.WriteLine("Error..."+Win32.User.Input.GetLastError());
                 }
             }
         }

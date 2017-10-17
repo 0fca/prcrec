@@ -19,6 +19,16 @@ namespace ProcessRecorder.Pages
             traceListView.ItemsSource = ImageContainer.GetImages();
             
         }
+
+        private void ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            //Debug.WriteLine("Scroll.");
+        }
+
+        private void MouseWheelListener(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            Debug.WriteLine("Scrolled.");
+        }
     }
 
     internal class ImageContainer {

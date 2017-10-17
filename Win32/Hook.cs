@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace WinApi.Win32.User
+namespace Win32.User
 {
     public class Hook
     {
@@ -25,7 +25,7 @@ namespace WinApi.Win32.User
         [StructLayout(LayoutKind.Sequential)]
         public class MouseHookStruct
         {
-            public WinApi.User.Window.POINT pt;
+            public Win32.User.Window.POINT pt;
             public int hwnd;
             public int wHitTestCode;
             public int dwExtraInfo;

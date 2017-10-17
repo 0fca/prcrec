@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WinApi.User.Enumeration
+namespace Win32.User.Enumeration
 {
     /// <summary>
     /// Enumeration for virtual keys.
