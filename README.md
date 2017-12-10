@@ -2,7 +2,7 @@
 _Victoria(codename: prcrec)_ is a simple recorder which records user's actions taken using keyboard and mouse wherever 
 on the screen, doesnt matter on what window. 
 
-MacroPath is in BETA phase. It actually supports recording ASCII chars, it recognizes all system key like **_Alt_**, **_AltGr_**,**_Shift_** etc.
+Victoria is in BETA phase. It actually supports recording ASCII chars, it recognizes all system key like **_Alt_**, **_AltGr_**,**_Shift_** etc. It wont record characters from e.g. UTF-8, for example character: 'ś' will be wrote down as: [AltGr][s]
 
 I used Win32 API to make all the application logic and a bit of reflection mechanism. The UI is built using modern WPF(Modern UI). 
 
